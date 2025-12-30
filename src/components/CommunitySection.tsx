@@ -13,10 +13,16 @@ const CommunitySection = ({ product }) => {
   if (!product) return null;
 
   const features = product.key_features || [];
-  const images = product.assets || [];
+  const assets = product.assets || [];
+
+  // Filter to only get images (exclude videos)
+  const imageAssets = assets.filter(asset => {
+    const path = asset.path?.toLowerCase() || '';
+    return !path.endsWith('.mp4') && !path.endsWith('.webm') && !path.endsWith('.mov') && !path.endsWith('.avi');
+  });
 
   // Get first 5 images for display
-  const displayImages = (images || []).slice(0, 5).map((asset, index) => ({
+  const displayImages = imageAssets.slice(0, 5).map((asset, index) => ({
     src: asset.path,
     alt: `${product.name} - Image ${index + 1}`
   }));

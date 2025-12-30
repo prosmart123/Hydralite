@@ -75,20 +75,22 @@ const FeatureShowcase = () => {
             // Find remaining priority products and map to component format
             const remainingProducts = remainingIds.map((id) => {
               const product = productsData.data.find((p) => p._id === id);
-              if (product) {
-                return {
-                  id: product._id,
-                  title: product.name.toUpperCase(),
-                  description: product.description,
-                  link: "LEARN MORE",
-                  image: product.assets && product.assets.length > 0 ? product.assets[0].path : "/hydralite/placeholder.jpg",
-                  cardTitle: product.name,
-                  cardDescription: product.description.length > 100 ? product.description.substring(0, 100) + "..." : product.description,
-                  cardLink: "EXPLORE",
-                  icon: getCategoryIcon(product.category, product.subcategory)
-                };
+              if (!product) {
+                console.warn(`⚠️ Product with ID ${id} not found in products data`);
+                return null;
               }
-              return null;
+              
+              return {
+                id: product._id,
+                title: product.name?.toUpperCase() || 'UNTITLED',
+                description: product.description || '',
+                link: "LEARN MORE",
+                image: product.assets?.length > 0 ? product.assets[0].path : "/hydralite/placeholder.jpg",
+                cardTitle: product.name || 'Untitled Product',
+                cardDescription: product.description?.length > 100 ? product.description.substring(0, 100) + "..." : (product.description || ''),
+                cardLink: "EXPLORE",
+                icon: getCategoryIcon(product.category, product.subcategory)
+              };
             }).filter(Boolean); // Remove null entries
 
             setFeatures(remainingProducts);
