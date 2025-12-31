@@ -307,7 +307,7 @@ const Products = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-normal text-foreground mb-6 tracking-tight"
           >
-            <span className="text-primary"> Our Innovative Products </span>
+            <span className="text-primary italic"> Our Innovative Products </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
