@@ -47,28 +47,28 @@ const FeatureShowcase = () => {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         // Fetch priority list
         const priorityResponse = await fetch('https://api.prosmart.in/api/hydralite/priority');
-        
+
         if (!priorityResponse.ok) {
           throw new Error(`Priority API error: ${priorityResponse.status}`);
         }
-        
+
         const priorityData = await priorityResponse.json();
 
         if (priorityData.success && priorityData.data.products && priorityData.data.products.length > 4) {
           // Skip first 4 and get remaining priority product IDs
           const remainingIds = priorityData.data.products.slice(4);
-          console.log('🔍 Remaining product IDs after skipping first 4:', remainingIds);
+          console.log(' Remaining product IDs after skipping first 4:', remainingIds);
 
-            // Fetch all products
-            const productsResponse = await fetch('https://api.prosmart.in/api/hydralite/products');
-          
+          // Fetch all products
+          const productsResponse = await fetch('https://api.prosmart.in/api/hydralite/products');
+
           if (!productsResponse.ok) {
             throw new Error(`Products API error: ${productsResponse.status}`);
           }
-          
+
           const productsData = await productsResponse.json();
 
           if (productsData.success && productsData.data) {
@@ -79,7 +79,7 @@ const FeatureShowcase = () => {
                 console.warn(`⚠️ Product with ID ${id} not found in products data`);
                 return null;
               }
-              
+
               return {
                 id: product._id,
                 title: product.name?.toUpperCase() || 'UNTITLED',
@@ -94,7 +94,7 @@ const FeatureShowcase = () => {
             }).filter(Boolean); // Remove null entries
 
             setFeatures(remainingProducts);
-            console.log('✅ Loaded remaining priority products:', remainingProducts.length, remainingProducts);
+            console.log(' Loaded remaining priority products:', remainingProducts.length, remainingProducts);
           } else {
             throw new Error('Products API returned no data');
           }
@@ -145,8 +145,8 @@ const FeatureShowcase = () => {
             <div className="text-red-500 text-6xl mb-4">⚠️</div>
             <h2 className="text-xl font-semibold text-foreground mb-2">Failed to Load Showcase</h2>
             <p className="text-muted-foreground mb-4">Error: {error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-accent transition-colors"
             >
               Retry
@@ -175,41 +175,41 @@ const FeatureShowcase = () => {
             {/* Left Content */}
             <div className="flex flex-col justify-center order-2 lg:order-1">
               <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeFeature.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                <motion.div
+                  key={activeFeature.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
+                  <div className="mb-6 hidden md:block">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary mb-4">
+                      {React.createElement(iconMap[activeFeature.icon], { className: "h-6 w-6" })}
+                    </div>
+                  </div>
+
+                  <span className="text-[10px] md:text-xs tracking-[0.3em] text-primary/70 uppercase font-normal mb-4 block">
+                    Advanced Solution
+                  </span>
+
+                  <div className="flex items-center gap-4 mb-6">
+                    <h2 className="text-3xl md:text-4xl uppercase leading-[1.1] tracking-tighter text-foreground lg:text-6xl font-normal">
+                      {activeFeature.title}
+                    </h2>
+                  </div>
+
+                  <p className="mb-8 max-w-lg text-sm md:text-base text-muted-foreground leading-relaxed">
+                    {activeFeature.description}
+                  </p>
+
+
+                  <button
+                    onClick={() => navigate(`/products/${activeFeature.id}`)}
+                    className="inline-flex items-center gap-2 text-sm font-normal uppercase text-primary hover:text-primary/80 transition-colors group/link"
                   >
-                    <div className="mb-6 hidden md:block">
-                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary mb-4">
-                        {React.createElement(iconMap[activeFeature.icon], { className: "h-6 w-6" })}
-                      </div>
-                    </div>
-                    
-                    <span className="text-[10px] md:text-xs tracking-[0.3em] text-primary/70 uppercase font-normal mb-4 block">
-                      Advanced Solution
-                    </span>
-
-                    <div className="flex items-center gap-4 mb-6">
-                      <h2 className="text-3xl md:text-4xl uppercase leading-[1.1] tracking-tighter text-foreground lg:text-6xl font-normal">
-                        {activeFeature.title}
-                      </h2>
-                    </div>
-                    
-                    <p className="mb-8 max-w-lg text-sm md:text-base text-muted-foreground leading-relaxed">
-                      {activeFeature.description}
-                    </p>
-
-                    
-                    <button
-                      onClick={() => navigate(`/products/${activeFeature.id}`)}
-                      className="inline-flex items-center gap-2 text-sm font-normal uppercase text-primary hover:text-primary/80 transition-colors group/link"
-                    >
-                      {activeFeature.link}
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-                    </button>
+                    {activeFeature.link}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                  </button>
                 </motion.div>
               </AnimatePresence>
 
@@ -219,9 +219,8 @@ const FeatureShowcase = () => {
                   <button
                     key={index}
                     onClick={() => setActiveIndex(index)}
-                    className={`h-1 rounded-full transition-all duration-500 ${
-                      index === activeIndex ? "w-12 bg-primary" : "w-6 bg-primary/20 hover:bg-primary/40"
-                    }`}
+                    className={`h-1 rounded-full transition-all duration-500 ${index === activeIndex ? "w-12 bg-primary" : "w-6 bg-primary/20 hover:bg-primary/40"
+                      }`}
                   />
                 ))}
               </div>
@@ -230,40 +229,40 @@ const FeatureShowcase = () => {
             {/* Image Section */}
             <div className="flex items-center justify-center order-1 lg:order-2">
               <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeFeature.id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative z-10 w-full flex items-center justify-center"
+                <motion.div
+                  key={activeFeature.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative z-10 w-full flex items-center justify-center"
+                >
+                  <div
+                    className="relative group/img p-6 md:p-10 lg:p-14 bg-white/40 backdrop-blur-md rounded-[2.5rem] border border-border/40 shadow-2xl shadow-primary/5 transition-all duration-700 hover:bg-white/60 hover:border-primary/30 cursor-zoom-in"
+                    onClick={() => setLightboxOpen(true)}
                   >
-                      <div 
-                        className="relative group/img p-6 md:p-10 lg:p-14 bg-white/40 backdrop-blur-md rounded-[2.5rem] border border-border/40 shadow-2xl shadow-primary/5 transition-all duration-700 hover:bg-white/60 hover:border-primary/30 cursor-zoom-in"
-                        onClick={() => setLightboxOpen(true)}
-                      >
-                        {/* Inner glow effect */}
-                        <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-700"></div>
-                        
-                          <img
-                            src={activeFeature.image}
-                            alt={activeFeature.cardTitle}
-                            className="h-64 w-64 md:h-64 md:w-64 lg:h-[350px] lg:w-[350px] object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-2xl"
-                          />
-                        
-                        {/* Animated corner accents */}
-                        <div className="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-primary/20 rounded-tl-lg transition-all duration-500 group-hover/img:border-primary/40 group-hover/img:scale-110"></div>
-                        <div className="absolute bottom-6 right-6 w-4 h-4 border-b-2 border-r-2 border-primary/20 rounded-br-lg transition-all duration-500 group-hover/img:border-primary/40 group-hover/img:scale-110"></div>
-                      </div>
+                    {/* Inner glow effect */}
+                    <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-700"></div>
 
-                        <ImageViewer 
-                          isOpen={lightboxOpen} 
-                          onClose={() => setLightboxOpen(false)}
-                          images={[activeFeature.image]}
-                          title={activeFeature.cardTitle}
-                        />
+                    <img
+                      src={activeFeature.image}
+                      alt={activeFeature.cardTitle}
+                      className="h-64 w-64 md:h-64 md:w-64 lg:h-[350px] lg:w-[350px] object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-2xl"
+                    />
 
-                  </motion.div>
+                    {/* Animated corner accents */}
+                    <div className="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-primary/20 rounded-tl-lg transition-all duration-500 group-hover/img:border-primary/40 group-hover/img:scale-110"></div>
+                    <div className="absolute bottom-6 right-6 w-4 h-4 border-b-2 border-r-2 border-primary/20 rounded-br-lg transition-all duration-500 group-hover/img:border-primary/40 group-hover/img:scale-110"></div>
+                  </div>
+
+                  <ImageViewer
+                    isOpen={lightboxOpen}
+                    onClose={() => setLightboxOpen(false)}
+                    images={[activeFeature.image]}
+                    title={activeFeature.cardTitle}
+                  />
+
+                </motion.div>
               </AnimatePresence>
             </div>
 

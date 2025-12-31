@@ -131,8 +131,8 @@ const ProductCard = ({ product }: { product: any }) => {
         onClick={handleCardClick}
       >
         {/* Front Side */}
-        <div className="absolute inset-0 backface-hidden flex flex-row md:flex-col bg-white/40 backdrop-blur-xl border border-white/40 rounded-2xl md:rounded-[2.5rem] p-2.5 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 overflow-hidden">
-          <div className="relative aspect-square md:aspect-[4/3] flex items-center justify-center overflow-hidden mb-0 md:mb-8 rounded-xl md:rounded-2xl bg-white/30 w-[85px] md:w-full flex-shrink-0">
+        <div className="absolute inset-0 backface-hidden flex flex-row md:flex-col bg-white/40 backdrop-blur-xl border border-white/40 rounded-2xl md:rounded-[2.5rem] p-2.5 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04),0_2px_8px_rgb(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.12)] transition-all duration-500 overflow-hidden transform hover:translate-y-[-4px]">
+          <div className="relative aspect-square md:aspect-[4/3] flex items-center justify-center overflow-hidden mb-0 md:mb-8 rounded-xl md:rounded-2xl bg-white/30 w-[85px] md:w-full flex-shrink-0 shadow-inner">
             <ProductImageSlider images={product.images || [product.image]} title={product.title} />
           </div>
 
@@ -145,10 +145,10 @@ const ProductCard = ({ product }: { product: any }) => {
             <p className="text-muted-foreground text-[14px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 line-clamp-2 md:line-clamp-3 font-normal">
               {product.description}
             </p>
-            <div className="mt-auto inline-flex items-center gap-1 md:gap-2 text-primary font-normal text-[15px] md:text-sm group/btn">
+            <div className="mt-auto inline-flex items-center gap-1 md:gap-2 text-sky-500 font-medium text-[13px] md:text-xs group/btn">
               <span className="relative">
-                View Details
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/btn:w-full" />
+                Learn More
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover/btn:w-full" />
               </span>
             </div>
           </div>
@@ -228,7 +228,7 @@ const Products = () => {
             const productImages = product.assets?.filter((a: any) => a.type === 'image').map((a: any) => a.path) || [];
 
             return {
-              id: product.id || product._id || index + 1,
+              id: product._id || product.id || index + 1,
               title: product.name,
               description: product.description,
               images: productImages.length > 0 ? productImages : [`/hydralite/${index + 1}.png`],

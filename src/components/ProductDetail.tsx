@@ -32,15 +32,15 @@ const ProductDetail = () => {
 
   const shareToEmail = () => {
     if (!product) return;
-    const subject = `Check out this ${product.name}`;
-    const body = `I found this interesting product: ${product.name}\n\n${window.location.href}`;
-    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const subject = `Interested in ${product.name}`;
+    const body = `Hi,\n\nI am interested in the ${product.name}.\n\nProduct Link: ${window.location.href}\n\nPlease provide me with more details.\n\nThank you.`;
+    window.location.href = `mailto:atul.anand@prosmart.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const shareToWhatsApp = () => {
     if (!product) return;
-    const text = `Check out this ${product.name}: ${window.location.href}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    const text = `Hi, I am interested in the ${product.name}. Please provide me with more details.`;
+    window.open(`https://wa.me/919821310229?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const copyToClipboard = async () => {
@@ -172,7 +172,7 @@ const ProductDetail = () => {
                               <img
                                 src={img}
                                 alt={`${product.name} - ${index + 1}`}
-                                  className="w-full h-full object-contain drop-shadow-2xl scale-75 md:scale-80"
+                                  className="w-full h-full object-contain drop-shadow-2xl scale-[0.45] md:scale-[0.50]"
                               />
                             </div>
                           ))}

@@ -113,7 +113,7 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose, title }
           </button>
 
           {/* Image Container */}
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-12">
+          <div className="w-full h-full flex items-center justify-center p-8 md:p-20 py-40 md:py-48">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -135,7 +135,7 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose, title }
                   dragElastic={0.1}
                   onDragStart={() => setIsDragging(true)}
                   onDragEnd={() => setIsDragging(false)}
-                  className={`max-w-full max-h-[75vh] object-contain select-none shadow-2xl ${zoom > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
+                  className={`max-w-full max-h-[40vh] object-contain select-none shadow-2xl ${zoom > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
                 />
               </motion.div>
             </AnimatePresence>

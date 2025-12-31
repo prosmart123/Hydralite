@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
-import FeaturesSection from "@/components/FeaturesSection";
+import AboutUs from "@/components/FeaturesSection";
 import CommunitySection from "@/components/CommunitySection";
 import ModelsSection from "@/components/ModelsSection";
 import FeatureShowcase from "@/components/ProductShowcase";
@@ -151,8 +151,8 @@ const Index = () => {
 
                     <div className="flex gap-3">
                       <div className="w-0.5 bg-primary/20 rounded-full self-stretch mt-0.5 mb-0.5 shrink-0" />
-                      <p className="text-sm text-muted-foreground max-w-xs leading-relaxed font-normal">
-                        {heroProducts.firstProduct.description.substring(0, 60) + "..."}
+                      <p className="text-sm text-muted-foreground max-w-xs leading-relaxed font-normal line-clamp-3">
+                        {heroProducts.firstProduct.description}
                       </p>
                     </div>
                     <button
@@ -199,8 +199,8 @@ const Index = () => {
 
                 <div className="flex gap-3">
                   <div className="w-0.5 bg-primary/20 rounded-full self-stretch mt-0.5 mb-0.5 shrink-0" />
-                  <p className="text-[10px] md:text-sm text-muted-foreground max-w-xs leading-relaxed line-clamp-2 md:line-clamp-none font-normal">
-                    {heroProducts.secondProduct.description.substring(0, 30) + "..."}
+                  <p className="text-[10px] md:text-sm text-muted-foreground max-w-xs leading-relaxed font-normal line-clamp-3">
+                    {heroProducts.secondProduct.description}
                   </p>
                 </div>
                 <button
@@ -219,7 +219,7 @@ const Index = () => {
 
       {/* Features Section */}
       <div id="our-story" className="scroll-mt-24 md:scroll-mt-32">
-        <FeaturesSection />
+        <AboutUs />
       </div>
 
       {/* ByTheNumbers Section */}
