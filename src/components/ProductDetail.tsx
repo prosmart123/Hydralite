@@ -158,7 +158,7 @@ const ProductDetail = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
             {/* Product Image Slider */}
-            <div className="relative max-w-[85%] mx-auto lg:max-w-[90%] w-full">
+            <div className="relative max-w-[65%] mx-auto lg:max-w-[70%] w-full">
               <div className="sticky top-32 space-y-6">
                 <div className="overflow-hidden group/slider relative rounded-3xl bg-white/40 backdrop-blur-sm border border-white/20">
                     <div className="overflow-hidden" ref={emblaRef}>
@@ -166,13 +166,13 @@ const ProductDetail = () => {
                           {product.images.map((img: string, index: number) => (
                             <div 
                               key={index} 
-                              className="flex-[0_0_100%] min-w-0 relative p-8 md:p-12 flex items-center justify-center aspect-square cursor-zoom-in"
+                              className="flex-[0_0_100%] min-w-0 relative p-1 flex items-center justify-center aspect-square cursor-zoom-in"
                               onClick={() => setLightboxOpen(true)}
                             >
                               <img
                                 src={img}
                                 alt={`${product.name} - ${index + 1}`}
-                                  className="w-full h-full object-contain drop-shadow-2xl scale-[0.45] md:scale-[0.50]"
+                                  className="w-full h-full object-contain drop-shadow-2xl scale-[0.95] md:scale-[0.98]"
                               />
                             </div>
                           ))}
@@ -218,7 +218,7 @@ const ProductDetail = () => {
                         <button
                           key={index}
                           onClick={() => emblaApi?.scrollTo(index)}
-                          className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all p-3 md:p-4 bg-white/60 backdrop-blur-sm hover:scale-105 ${
+                          className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all p-1 md:p-2 bg-white/60 backdrop-blur-sm hover:scale-105 ${
                             index === selectedIndex 
                               ? "border-primary shadow-lg scale-105 bg-white/80" 
                               : "border-white/40 opacity-70 hover:opacity-100 hover:border-primary/50"
