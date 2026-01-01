@@ -54,7 +54,7 @@ const ProductImageSlider = ({ images, title }: { images: string[], title: string
           {images.map((img, index) => (
             <div
               key={index}
-              className="flex-[0_0_100%] min-w-0 relative flex items-center justify-center p-1 md:p-2 cursor-zoom-in"
+              className="flex-[0_0_100%] min-w-0 relative flex items-center justify-center p-2 md:p-4 cursor-zoom-in"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -120,7 +120,7 @@ const ProductCard = ({ product }: { product: any }) => {
 
   return (
     <div
-      className="perspective-1000 w-full h-[130px] md:h-[400px]"
+      className="perspective-1000 w-full h-[130px] md:h-[440px]"
       onMouseEnter={() => !isMobile && setIsFlipped(true)}
       onMouseLeave={() => !isMobile && setIsFlipped(false)}
     >
@@ -131,21 +131,21 @@ const ProductCard = ({ product }: { product: any }) => {
         onClick={handleCardClick}
       >
         {/* Front Side */}
-        <div className="absolute inset-0 backface-hidden flex flex-row md:flex-col bg-white/40 backdrop-blur-xl border border-white/40 rounded-2xl md:rounded-[2rem] p-2 md:p-2 shadow-[0_8px_30px_rgb(0,0,0,0.04),0_2px_8px_rgb(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.12)] transition-all duration-500 overflow-hidden transform hover:translate-y-[-4px]">
-            <div className="relative aspect-square md:aspect-[4/3] flex items-center justify-center overflow-hidden mb-0 md:mb-2 rounded-xl md:rounded-2xl bg-white/30 w-[85px] md:w-full flex-shrink-0 shadow-inner">
-              <ProductImageSlider images={product.images || [product.image]} title={product.title} />
-            </div>
+        <div className="absolute inset-0 backface-hidden flex flex-row md:flex-col bg-white/40 backdrop-blur-xl border border-white/40 rounded-2xl md:rounded-[2rem] p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04),0_2px_8px_rgb(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.12)] transition-all duration-500 overflow-hidden transform hover:translate-y-[-4px]">
+          <div className="relative aspect-square md:aspect-[4/3] flex items-center justify-center overflow-hidden mb-0 md:mb-4 rounded-xl md:rounded-2xl bg-white/30 w-[85px] md:w-full flex-shrink-0 shadow-inner">
+            <ProductImageSlider images={product.images || [product.image]} title={product.title} />
+          </div>
 
-          <div className="flex flex-col flex-1 pl-2 md:pl-0 justify-center">
-            <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-2">
+          <div className="flex flex-col flex-1 pl-4 md:pl-0 md:px-2 justify-center">
+            <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-3">
               <h3 className="text-[17px] md:text-xl font-body font-normal text-foreground tracking-tight line-clamp-2 md:line-clamp-1">
                 {product.title}
               </h3>
             </div>
-            <p className="text-muted-foreground text-[13px] md:text-xs leading-snug md:leading-relaxed mb-1 md:mb-3 line-clamp-2 md:line-clamp-2 font-normal">
+            <p className="text-muted-foreground text-[13px] md:text-sm leading-snug md:leading-relaxed mb-1 md:mb-6 line-clamp-2 md:line-clamp-2 font-normal">
               {product.description}
             </p>
-            <div className="mt-auto inline-flex items-center gap-1 md:gap-2 text-sky-500 font-medium text-[12px] md:text-[10px] group/btn">
+            <div className="mt-auto inline-flex items-center gap-1 md:gap-2 text-sky-500 font-medium text-[12px] md:text-sm group/btn md:mb-3">
               <span className="relative">
                 Learn More
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover/btn:w-full" />
@@ -200,10 +200,10 @@ const Products = () => {
   const filteredFeatures = useMemo(() => {
     if (!searchQuery) return features;
     const query = searchQuery.toLowerCase();
-    return features.filter((p: any) => 
-      p.title.toLowerCase().includes(query) || 
+    return features.filter((p: any) =>
+      p.title.toLowerCase().includes(query) ||
       p.description.toLowerCase().includes(query) ||
-      p.key_features?.some((f: any) => 
+      p.key_features?.some((f: any) =>
         (typeof f === 'string' ? f : f.title).toLowerCase().includes(query)
       )
     );
@@ -307,7 +307,7 @@ const Products = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-normal text-foreground mb-6 tracking-tight"
           >
-            <span className="text-primary"> Our Innovative Products </span>
+            <span className="text-primary italic"> Our Innovative Products </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
